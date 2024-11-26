@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AppProviders from "./_components/providers/AppProviders";
 
 export const metadata: Metadata = {
   title: "FlowScrape: Crie Web Scrapers Visuais com AI e Automação",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   );
 }
