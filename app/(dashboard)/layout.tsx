@@ -1,8 +1,8 @@
 import React from "react";
 import { Separator } from "@/app/_components/ui/separator";
-import DesktopSidebar from "../_components/DesktopSidebar";
 import BreadcrumbHeader from "../_components/BreadcrumbHeader";
 import { ModeToggle } from "../_components/ThemeModeToggle";
+import { DesktopSidebar } from "../_components/Sidebar";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
