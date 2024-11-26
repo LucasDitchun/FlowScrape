@@ -36,10 +36,10 @@ const routes = [
 ];
 
 const DesktopSidebar = () => {
-  const pathname = usePathname();
+  const pathName = usePathname();
   const activeRoute =
     routes.find(
-      (route) => route.href.length > 0 && pathname.includes(route.href),
+      (route) => route.href.length > 0 && pathName.includes(route.href),
     ) || routes[0];
 
   return (
@@ -47,6 +47,7 @@ const DesktopSidebar = () => {
       <div className="flex border-separate items-center justify-center gap-2 border-b-[1px] p-4">
         <Logo />
       </div>
+      <div className="p-2">TODO CREDITS</div>
       <div className="flex flex-col space-y-1 p-2">
         {routes.map((route) => (
           <Link
