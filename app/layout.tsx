@@ -3,6 +3,7 @@ import "./globals.css";
 import AppProviders from "./_components/providers/AppProviders";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import { Toaster } from "./_components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "FlowScrape: Crie Web Scrapers Visuais com AI e Automação",
@@ -29,6 +30,7 @@ export default function RootLayout({
         <body className={`antialiased`}>
           <AppProviders>{children}</AppProviders>
         </body>
+        <Toaster richColors />
       </html>
     </ClerkProvider>
   );

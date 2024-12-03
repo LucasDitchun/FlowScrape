@@ -10,9 +10,9 @@ import {
 import {
   createWorkflowSchema,
   createWorkflowSchemaType,
-} from "@/app/schema/workflow";
-import { Layers2Icon } from "lucide-react";
-import { useState } from "react";
+} from "@/app/_schema/workflow";
+import { Layers2Icon, Loader2 } from "lucide-react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -26,6 +26,9 @@ import {
 } from "@/app/_components/ui/form";
 import { Input } from "@/app/_components/ui/input";
 import { Textarea } from "@/app/_components/ui/textarea";
+import { useMutation } from "@tanstack/react-query";
+import { createWorkflow } from "@/app/_actions/workflows/createWorkflow";
+import { toast } from "sonner";
 
 export const CreateWorkflowDialog = ({
   triggerText,
@@ -38,6 +41,24 @@ export const CreateWorkflowDialog = ({
     resolver: zodResolver(createWorkflowSchema),
     defaultValues: {},
   });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: createWorkflow,
+    onSuccess: () => {
+      toast.success("Workflow criado com sucesso", { id: "create-workflow" });
+    },
+    onError: () => {
+      toast.error("Erro ao criar workflow", { id: "create-workflow" });
+    },
+  });
+
+  const onSubmit = useCallback(
+    (values: createWorkflowSchemaType) => {
+      toast.loading("Criando workflow...", { id: "create-workflow" });
+      mutate(values);
+    },
+    [mutate],
+  );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -52,7 +73,10 @@ export const CreateWorkflowDialog = ({
         />
         <div className="p-6">
           <Form {...form}>
-            <form className="w-full space-y-8">
+            <form
+              className="w-full space-y-8"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -97,8 +121,9 @@ export const CreateWorkflowDialog = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Continuar
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {!isPending && "Criar Workflow"}
+                {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </form>
           </Form>
