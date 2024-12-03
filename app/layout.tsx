@@ -28,9 +28,11 @@ export default function RootLayout({
     >
       <html lang="pt-br">
         <body className={`antialiased`}>
-          <AppProviders>{children}</AppProviders>
+          <AppProviders>
+            {children}
+            <Toaster richColors />
+          </AppProviders>
         </body>
-        <Toaster richColors />
       </html>
     </ClerkProvider>
   );
