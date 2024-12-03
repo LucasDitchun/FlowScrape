@@ -4,12 +4,12 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/app/_components/ui/alert";
-import { Button } from "@/app/_components/ui/button";
 import { Skeleton } from "@/app/_components/ui/skeleton";
-import { AlertCircle, InboxIcon, Layers2Icon } from "lucide-react";
+import { AlertCircle, InboxIcon } from "lucide-react";
 import { Suspense } from "react";
+import { CreateWorkflowDialog } from "./_components/CreateWorkflowDialog";
 
-const Workflows = () => {
+const WorkflowsPage = () => {
   return (
     <div className="flex h-full flex-1 flex-col">
       <div className="flex justify-between">
@@ -17,6 +17,7 @@ const Workflows = () => {
           <h1 className="text-3x1 font-bold">Workflows</h1>
           <p className="text-muted-foreground">Gerencie seus Workflows</p>
         </div>
+        <CreateWorkflowDialog />
       </div>
 
       <div className="h-full py-6">
@@ -64,11 +65,8 @@ const UserWorkFlows = async () => {
           <p className="text-sm text-muted-foreground">
             Clique no botão abaixo para criar seu primeiro workflow
           </p>
-          <Button className="mt-4">
-            <Layers2Icon />
-            Criar Workflow
-          </Button>
         </div>
+        <CreateWorkflowDialog triggerText="Crie seu primeiro workflow" />
       </div>
     );
   }
@@ -76,4 +74,4 @@ const UserWorkFlows = async () => {
   return <div></div>;
 };
 
-export default Workflows;
+export default WorkflowsPage;
