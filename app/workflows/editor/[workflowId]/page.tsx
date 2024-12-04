@@ -1,5 +1,6 @@
 import prisma from "@/app/_lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { Editor } from "../../_components/Editor";
 
 const WorkflowEditorPage = async ({
   params,
@@ -20,7 +21,7 @@ const WorkflowEditorPage = async ({
 
   if (!workflow) return <div>Workflow não encontrado</div>;
 
-  return <pre className="h-screen">{JSON.stringify(workflow, null, 4)}</pre>;
+  return <Editor workflow={workflow} />;
 };
 
 export default WorkflowEditorPage;
